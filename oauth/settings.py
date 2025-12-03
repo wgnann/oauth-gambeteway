@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-q6)!c7=sk-ol)k8&b0h#u*b@gr#l0!i$6r(db^s(%!_oje&-7m
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["oauth2.moderno.usp.br"]
 
 
 # Application definition
@@ -37,6 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'oauth2_provider',
+    'corsheaders',
+    'django_oauth_usp.accounts',
 ]
 
 MIDDLEWARE = [
@@ -47,6 +50,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+    'django_oauth_usp.accounts.middleware.OAuthUspMiddleware',
 ]
 
 ROOT_URLCONF = 'oauth.urls'
@@ -115,3 +120,31 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
 STATIC_URL = 'static/'
+
+### OAuth2 server
+CORS_ORIGIN_ALLOW_ALL = True
+OAUTH2_PROVIDER = {
+    "PKCE_REQUIRED": False
+}
+
+# o OAuth2 espera /accounts/login/ e o OAuthUSP, /accounts/login...
+LOGIN_URL = '/accounts/login'
+
+### OAuthUSP
+AUTH_USER_MODEL = 'accounts.UserModel'
+
+### informações variáveis do OAuthUSP
+OAUTH_CALLBACK_ID = 'numero-inteiro'
+
+AUTHLIB_OAUTH_CLIENTS = {
+    'usp': {
+        'client_id': 'seu-client-id',
+        'client_secret': 'seu-client-secret'
+    }
+}
+
+REDIRECT_URI = '/'
+REDIRECT_AFTER_LOGOUT_URL = '/'
+
+# lista de unidades por número
+ALLOWED_UNIDADES = [3]
