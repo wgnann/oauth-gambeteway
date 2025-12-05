@@ -124,7 +124,11 @@ STATIC_URL = 'static/'
 ### OAuth2 server
 CORS_ORIGIN_ALLOW_ALL = True
 OAUTH2_PROVIDER = {
-    "PKCE_REQUIRED": False
+    'PKCE_REQUIRED': False,
+    'OIDC_ENABLED': True,
+    'SCOPES': {
+        'openid': 'OpenID Connect scope',
+    },
 }
 
 # o OAuth2 espera /accounts/login/ e o OAuthUSP, /accounts/login...

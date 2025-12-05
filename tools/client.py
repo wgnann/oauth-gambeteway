@@ -3,14 +3,15 @@ import os
 
 # https://requests-oauthlib.readthedocs.io/en/latest/oauth2_workflow.html
 
-client_id = 'Yr6286ShBNbVeILJZygYYogZICbYXpamH9H4sSN8'
-client_secret = 'kQu21cFMid3Z05gMUotwWuFn4HD7nx35yTPkEyxyk3pdSCWEmKKJRjSVLUzJ3N4QCT3AisKggaLtb083rRN56Wl8ukOzCYRfFP1EcgxJkGztrxKGMGBwajc3xK798c2K'
+client_id = 'Yzk8KdACpNT1df6YjcLF1O4yzTrpt3tfu5a7krdI'
+client_secret = '1LwJhElM3KA01SJ2g4cWqv5A92lJdlf0cZXA2l4aaeeL9sOcIuIWJLwYPuXB6PR6eu8ELAXEaWRsBM3sfWahqH1pY8V1kEcwafKNkiMaCsNOfid2ci3c7GqOJPLPtakV'
 os.environ["OAUTHLIB_INSECURE_TRANSPORT"] = '1'
 
-base = 'http://oauth2.ime.usp.br:8080'
+base = 'http://127.0.0.1:8000'
 oauth = OAuth2Session(client_id)
 auth_url, state = oauth.authorization_url(base+'/o/authorize/')
 print(auth_url)
 auth_resp = input('response: ')
 token = oauth.fetch_token(base+'/o/token/', authorization_response=auth_resp, client_secret=client_secret)
-print(token)
+resp = oauth.get(base+'/o/userinfo')
+print(resp.text)
