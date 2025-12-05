@@ -1,1 +1,4 @@
 __pycache__
+db.sqlite3
+oauth/settings-commit.py
+oauth/settings-prod.py

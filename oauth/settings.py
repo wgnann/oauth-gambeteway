@@ -126,6 +126,7 @@ CORS_ORIGIN_ALLOW_ALL = True
 OAUTH2_PROVIDER = {
     'PKCE_REQUIRED': False,
     'OIDC_ENABLED': True,
+    'OAUTH2_VALIDATOR_CLASS': 'oauth_validators.CustomOAuth2Validator',
     'SCOPES': {
         'openid': 'OpenID Connect scope',
     },
